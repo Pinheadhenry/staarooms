@@ -11,6 +11,16 @@ router.get('/', async (req, res) => {
     //     data: new Map()
     // })
     // const newAdmin = await admin.save()
+    const count = await usedid.estimatedDocumentCount()
+    if (count == 0) {
+        const hashedPass = await bcrypt.hash('admin1234', 10)
+        const admin = new Admin({
+            username: "admin",
+            password: hashedPass,
+            data: new Map()
+        })
+        const newAdmin = await admin.save()
+    }
 
     res.render('login')
 })
