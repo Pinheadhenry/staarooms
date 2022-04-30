@@ -44,7 +44,7 @@
 
 <script>
     document.getElementById('btn-delete').addEventListener('click', () => {
-        fetch('http://localhost:3000/admin/<%= id  %>/delete', {
+        fetch('https://staaroom.herokuapp.com//admin/<%= id  %>/delete', {
                     method: 'POST',
                 })
     })
@@ -59,7 +59,7 @@
 
             reader.onload = readerEvent => {
                 var content = readerEvent.target.result;
-                fetch('http://localhost:3000/admin//<%= id  %>', {
+                fetch('https://staaroom.herokuapp.com/admin/<%= id  %>', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -74,7 +74,7 @@
         input.click()
     })
     document.getElementById('btn-show-all').addEventListener('click', () => {
-        fetch('http://localhost:3000/admin/<%= id %>/getdata')
+        fetch('https://staaroom.herokuapp.com/admin/<%= id %>/getdata')
         .then(response => response.json())
         .then(data => {
             console.log(data.data)
