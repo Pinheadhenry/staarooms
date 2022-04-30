@@ -1,0 +1,95 @@
+<section class="bg-light text-center text-dark p-5">
+    <div class="container">
+        <button id="btn-csv-file" type="button" class="btn btn-primary m-2">Upload CSV File</button>
+        <button id="btn-show-all" type="button" class="btn btn-primary m-2">Show Current Data</button>
+        <button id="btn-delete" type="button" class="btn btn-primary m-2">Delete Current Data</button>
+        <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Change Credentials</button>
+        <table id="tbl">
+            
+        </table>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-bs-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                    <div class="modal-body">
+                        <form action="/admin/<%= id %>/update" method="POST" autocomplete="off">
+                            <div class="">
+                              <label for="username" class="col-sm-2 col-form-label">Username</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control" id="username" name="username">
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="password" class="col-sm-2 col-form-label">Password</label>
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control" id="password" name="password">
+                              </div>
+                            </div>
+                            <button type="submit" class="btn btn-dark">Save</button>
+                        </form>
+                    </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>   
+</section>
+
+<script>
+    document.getElementById('btn-delete').addEventListener('click', () => {
+        fetch('http://localhost:3000/admin/<%= id  %>/delete', {
+                    method: 'POST',
+                })
+    })
+    document.getElementById('btn-csv-file').addEventListener('click', () => {
+        var input = document.createElement('input')
+        input.type = 'file'
+        input.accept = '.csv'
+        input.onchange = e => { 
+            var file = e.target.files[0]; 
+            var reader = new FileReader();
+            reader.readAsText(file,'UTF-8');
+
+            reader.onload = readerEvent => {
+                var content = readerEvent.target.result;
+                fetch('http://localhost:3000/admin//<%= id  %>', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: "henry",
+                        data: content
+                    })
+                })
+            }
+        }
+        input.click()
+    })
+    document.getElementById('btn-show-all').addEventListener('click', () => {
+        fetch('http://localhost:3000/admin/<%= id %>/getdata')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.data)
+            const table = document.getElementById('tbl')
+            for (const key in data.data) {
+                const row = document.createElement('tr')
+                const id = document.createElement('td')
+                const room = document.createElement('td')
+                id.textContent = key + " : " + data.data[key]
+                row.appendChild(id)
+                row.appendChild(room)
+                table.appendChild(row)
+            }
+            
+            
+        })
+    })
+</script>
