@@ -4,13 +4,13 @@ const bcrypt = require('bcrypt')
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-    // const hashedPass = await bcrypt.hash('admin1234', 10)
-    // const admin = new Admin({
-    //     username: "admin",
-    //     password: hashedPass,
-    //     data: new Map()
-    // })
-    // const newAdmin = await admin.save()
+    const hashedPass = await bcrypt.hash('admin1234', 10)
+    const admin = new Admin({
+        username: "admin",
+        password: hashedPass,
+        data: new Map()
+    })
+    const newAdmin = await admin.save()
 
     res.render('login')
 })
