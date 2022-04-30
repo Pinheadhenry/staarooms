@@ -3,16 +3,21 @@ const Admin = require('../models/admin')
 const bcrypt = require('bcrypt')
 const router = express.Router()
 
-const hashedPass = await bcrypt.hash('admin1234', 10)
+
+
+
+router.get('/', async (req, res) => {
+    res.render('login')
+})
+router.get('/generate', async (req, res) => {
+    const hashedPass = await bcrypt.hash('admin1234', 10)
     const admin = new Admin({
         username: "admin",
         password: hashedPass,
         data: new Map()
     })
     const newAdmin = await admin.save()
-
-router.get('/', async (req, res) => {
-    res.render('login')
+    res.send("yo")
 })
 router.post('/', async (req, res) => {
     //await Admin.deleteMany({})
