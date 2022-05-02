@@ -24,7 +24,7 @@ router.post('/:id', async (req, res) => {
 })
 router.post('/:id/delete', async (req, res) => {
     const admin = Admin.findById(req.params.id)
-    admin.data.clear()
+    admin.data = []
     admin.save()
     res.send({
         msg: 'deleted'
