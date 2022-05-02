@@ -44,9 +44,12 @@
 
 <script>
     document.getElementById('btn-delete').addEventListener('click', () => {
+        // fetch('http://localhost:3000/admin/<%= id  %>/delete', {
+        //             method: 'POST',
+        //         })
         fetch('https://staaroom.herokuapp.com/admin/<%= id  %>/delete', {
-                    method: 'POST',
-                })
+            method: 'POST',
+        })
     })
     document.getElementById('btn-csv-file').addEventListener('click', () => {
         var input = document.createElement('input')
@@ -69,6 +72,16 @@
                         data: content
                     })
                 })
+                // fetch('http://localhost:3000/admin/<%= id  %>', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify({
+                //         name: "henry",
+                //         data: content
+                //     })
+                // })
             }
         }
         input.click()
@@ -88,8 +101,21 @@
                 row.appendChild(room)
                 table.appendChild(row)
             }
-            
-            
         })
+        // fetch('http://localhost:3000/admin/<%= id %>/getdata')
+        // .then(response => response.json())
+        // .then(data => {
+        //     console.log(data.data)
+        //     const table = document.getElementById('tbl')
+        //     for (const key in data.data) {
+        //         const row = document.createElement('tr')
+        //         const id = document.createElement('td')
+        //         const room = document.createElement('td')
+        //         id.textContent = key + " : " + data.data[key]
+        //         row.appendChild(id)
+        //         row.appendChild(room)
+        //         table.appendChild(row)
+        //     }
+        // })
     })
 </script>

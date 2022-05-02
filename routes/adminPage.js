@@ -23,7 +23,7 @@ router.post('/:id', async (req, res) => {
     }
 })
 router.post('/:id/delete', async (req, res) => {
-    const admin = Admin.findById(req.params.id)
+    const admin = await Admin.findById(req.params.id)
     admin.data = []
     admin.save()
     res.send({
