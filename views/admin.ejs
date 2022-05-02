@@ -2,6 +2,7 @@
     <div class="container">
         <button id="btn-csv-file" type="button" class="btn btn-primary m-2">Upload CSV File</button>
         <button id="btn-show-all" type="button" class="btn btn-primary m-2">Show Current Data</button>
+        <button id="btn-delete" type="button" class="btn btn-primary m-2">Delete Data</button>
         <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Change Credentials</button>
         <table id="tbl">
             
@@ -43,7 +44,7 @@
 
 <script>
     document.getElementById('btn-delete').addEventListener('click', () => {
-        fetch('https://staaroom.herokuapp.com//admin/<%= id  %>/delete', {
+        fetch('https://staaroom.herokuapp.com/admin/<%= id  %>/delete', {
                     method: 'POST',
                 })
     })
