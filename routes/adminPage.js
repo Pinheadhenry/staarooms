@@ -9,7 +9,7 @@ router.get('/:id', (req, res) => {
 router.post('/:id', async (req, res) => {
     console.log("ran")
     try {
-        const admins = await Admin.find({})
+        const admins = await Admin.findById(req.params.id)
         admins[0].data = [];
         str = req.body.data.replace("\r", "")
         const rows = str.split("\n").map(row => row.trim());
