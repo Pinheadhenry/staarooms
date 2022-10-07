@@ -10,13 +10,13 @@ router.post('/:id', async (req, res) => {
     console.log("ran")
     try {
         const admins = await Admin.findById(req.params.id)
-        admins[0].data = [];
+        admins.data = [];
         str = req.body.data.replace("\r", "")
         const rows = str.split("\n").map(row => row.trim());
         rows.map(row => {
-            admins[0].data.set(row.split(",")[0], row.split(",")[1])
+            admins.data.set(row.split(",")[0], row.split(",")[1])
         })
-        admins[0].save()
+        admins.save()
         //console.log(admins[0])
     } catch (error) {
         console.log(error)
