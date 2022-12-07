@@ -47,7 +47,7 @@
         // fetch('http://localhost:3000/admin/<%= id  %>/delete', {
         //             method: 'POST',
         //         })
-        fetch('https://staaroom.onrender.com/admin/<%= id  %>/delete', {
+        fetch('https://staarooms.onrender.com/admin/<%= id  %>/delete', {
             method: 'POST',
         })
     })
@@ -62,7 +62,7 @@
 
             reader.onload = readerEvent => {
                 var content = readerEvent.target.result;
-                fetch('https://staaroom.onrender.com/admin/<%= id  %>', {
+                fetch('https://staarooms.onrender.com/admin/<%= id  %>', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -87,7 +87,7 @@
         input.click()
     })
     document.getElementById('btn-show-all').addEventListener('click', () => {
-        fetch('https://staaroom.onrender.com/admin/<%= id %>/getdata')
+        fetch('https://staarooms.onrender.com/admin/<%= id %>/getdata')
         .then(response => response.json())
         .then(data => {
             console.log(data.data)
